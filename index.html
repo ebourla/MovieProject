@@ -1,9 +1,51 @@
 <!DOCTYPE html>
+<html ng-app="movieApp"></html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link data-require="bootstrap@*" data-semver="4.1.3" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="app.js"></script>
+  <script src="actorsCtrl.js"></script>
+  <script src="actorDir.js"></script>
+  <script src="movieCtrl.js"></script>
+  <script src="movieDir.js"></script>
+  <script src="actorSrv.js"></script>
+  <script src="movieSrv.js"></script>
 </head>
-<body>
-<p>Hi<p>
-</body>
-</html>
+<body ng-controller="actorsCtrl">
+    <main class="container">
+      <h1 class="text-center py-5">Movie Project</h1>
+      <h2 class="text-left py-3 mt-3">My Favorite Actors!</h2>
+      <form class="search-box">
+        <input type="text" class="form-control" placeholder="Enter Actor Name" ng-model="searchText" ng-change="actorSearch()">
+        <div class="search-results list-group">
+          <a href="#" class="list-group-item list-group-item-action" ng-repeat="result in results | limitTo : 10" ng-click="addActor(result)">{{result.name}}</a>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-sm-6 col-lg-3" ng-repeat="actor in actors">
+          <actor-card></actor-card>
+        </div>
+      </div>
+      <div ng-controller="movieCtrl">
+        <h2 class="text-left py-3 mt-5">My Favorite Movies!</h2>
+        <form class="search-box">
+          <input type="text" class="form-control" placeholder="Enter Movie Name" ng-model="searchMovText" ng-change="searchMovie()">
+          <div class="search-results list-group">
+            <a href="#" class="list-group-item list-group-item-action" ng-repeat="result in results | limitTo : 10" ng-click="addMovie(result)">{{result.original_title}}</a>
+          </div>
+  
+        </form>
+        <div class="row">
+          <div class="col-sm-6 col-lg-3" ng-repeat="movie in movies">
+            <movie-card></movie-card>
+          </div>
+        </div>
+      </div>
+    </main>
+    
+  </body>
+  
+  </html>
